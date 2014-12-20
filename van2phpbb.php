@@ -495,6 +495,7 @@ function html2bbcode( $html, $removeTagScraps=true )
         "</(u|underline)>"   => "[/u]",
         
         "<blockquote>"       => "[quote]",
+        "<blockquote rel=[\"']([^\"']+)[\"']>"       => "[quote=&quot;$1&quot;]",
         "</blockquote>"      => "[/quote]",
         
         "<img [^>]*src=[\"']([^>\"']+)[\"'][^>]*>"        => "[img]$1[/img]",
