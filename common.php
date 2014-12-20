@@ -6,7 +6,7 @@ ini_set("display_errors", 1);
 
 //Config Settings:
 $config=array();
-$config['db']['type'] = 'mysqlt';     // access layer used by ADODB to connect to databse. 
+$config['db']['type'] = 'mysqli';     // access layer used by ADODB to connect to databse.
 $config['db']['host'] = 'localhost';  // Host name or "hostname:port".
 $config['db']['name'] = '';           // Database name.
 $config['db']['user'] = '';           // Authentication Name.
