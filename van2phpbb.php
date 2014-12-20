@@ -905,7 +905,12 @@ class van2phpbb
 					break;
 					}
 				}
-				
+				if($fbID != 0 || $twID != 0 || $oiID != 0) {
+					$userinfo = $this->vdb->Execute('SELECT `Name` FROM `GDN_User` WHERE `UserID` = ' . $vnID);
+					$userrow = $userinfo->GetRowAssoc();
+					$username = $userrow['Name'];
+					print "User: {$username} (vnID: {$vnID} / bbID {$bbID}) has social logins fbID: {$fbID} twID: {$twID} oiID: {$oiID} NOT IMPORTED!<br />";
+				}
 				//al_fb_id 	al_wl_id 	al_tw_id 	al_oi_id
 				$sql = 'UPDATE ' . USERS_TABLE . ' SET `al_fb_id`=\''. $fbID .'\', `al_tw_id`=\''. $twID .'\', `al_oi_id`=\''. $oiID .'\'
                         WHERE user_id = ' . $bbID ;
