@@ -912,9 +912,9 @@ class van2phpbb
 					print "User: {$username} (vnID: {$vnID} / bbID {$bbID}) has social logins fbID: {$fbID} twID: {$twID} oiID: {$oiID} NOT IMPORTED!<br />";
 				}
 				//al_fb_id 	al_wl_id 	al_tw_id 	al_oi_id
-				$sql = 'UPDATE ' . USERS_TABLE . ' SET `al_fb_id`=\''. $fbID .'\', `al_tw_id`=\''. $twID .'\', `al_oi_id`=\''. $oiID .'\'
-                        WHERE user_id = ' . $bbID ;
-				$db->sql_query( $sql );
+// 				$sql = 'UPDATE ' . USERS_TABLE . ' SET `al_fb_id`=\''. $fbID .'\', `al_tw_id`=\''. $twID .'\', `al_oi_id`=\''. $oiID .'\'
+//                         WHERE user_id = ' . $bbID ;
+// 				$db->sql_query( $sql );
 			}
 		}
 	}
