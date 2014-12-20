@@ -576,7 +576,7 @@ function html2bbcode( $html, $removeTagScraps=true )
     
     if( $removeTagScraps == true )
     {
-        $html = utf8_encode( html_entity_decode( strip_tags( $html ) ) );
+        $html = utf8_encode( strip_tags( $html ) );
         return $html;
     }
     else
