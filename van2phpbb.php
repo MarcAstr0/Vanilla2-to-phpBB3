@@ -60,7 +60,6 @@ function addNewUser( $userName, $email, $password, $usr_type, $regDate, $lastAct
       'user_email'      => $email,
       'group_id'        => 2, //Registered User Group.
       'user_timezone'   => '1.00',
-      'user_dst'        => 0,
       'user_lang'       => 'en',
       'user_type'       => $usr_type, //NORMAL_USER 0
       'user_actkey'     => $user_actkey,
