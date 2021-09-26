@@ -882,15 +882,15 @@ class van2phpbb
 					switch( strtolower( $usrAuth['ProviderKey'] ) )
 					{
 					case 'facebook':
-						$fbID = mysql_escape_string( $usrAuth[ 'ForeignUserKey' ] );
+						$fbID = mysql_real_escape_string($usrAuth['ForeignUserKey']);
 					break;
 					
 					case 'twitter':
-						$twID = mysql_escape_string( $usrAuth[ 'ForeignUserKey' ] );
+						$twID = mysql_real_escape_string($usrAuth['ForeignUserKey']);
 					break;
 					
 					case 'openid':
-						$oiID = mysql_escape_string( $usrAuth[ 'ForeignUserKey' ] );
+						$oiID = mysql_real_escape_string($usrAuth['ForeignUserKey']);
 					break;	
 					
 					//cases to skip, as they deal with internal vanilla hashing or JS-connect settings from wordpress.
