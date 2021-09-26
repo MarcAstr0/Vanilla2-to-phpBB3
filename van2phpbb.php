@@ -85,7 +85,7 @@ function checkInvalidUser( $username, $email )
 {
     $err = '';
 
-    $valid_email = validate_email($email);
+    $valid_email = phpbb_validate_email($email);
     if( $valid_email ) 
     {
         $err .= $valid_email .".\n";
