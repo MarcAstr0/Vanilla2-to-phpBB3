@@ -13,9 +13,9 @@ $config['db']['user'] = '';           // Authentication Name.
 $config['db']['pass'] = '';           // Authentication password.
 
 //Import system function libraries.
-require_once( './adodb/adodb-exceptions.inc.php' );
-require_once( './adodb/adodb-errorhandler.inc.php' );
-require_once( './adodb/adodb.inc.php' );
+require_once( './ADOdb/adodb-exceptions.inc.php' );
+require_once( './ADOdb/adodb-errorhandler.inc.php' );
+require_once( './ADOdb/adodb.inc.php' );
 
 //Create and test the connection to the databse.
 try
