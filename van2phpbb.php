@@ -317,9 +317,9 @@ function addTopicPost( $subject, $message, $forumID, $topicID, $userID, $userNam
 	// If this is a topic post, and not a comment-post, re-set poster information that was auto-populated by the API function.
     if( $topicID == 0 )
     {
-        $userName = $this->vdb->escape( $userName );
+        $userName = $db->sql_escape( $userName );
         
-        $lastPosterName = $this->vdb->escape( $tPosters['lp_name'] );
+        $lastPosterName = $db->sql_escape( $tPosters['lp_name'] );
         $lastPosterID   = ( empty($tPosters['lp_id']) ) ? 0 : $tPosters['lp_id'] ;
         $lastPostTime   = $tPosters['lp_time'];
         
@@ -879,15 +879,15 @@ class van2phpbb
 					switch( strtolower( $usrAuth['ProviderKey'] ) )
 					{
 					case 'facebook':
-						$fbID = $this->vdb->escape($usrAuth['ForeignUserKey']);
+						$fbID = $db->sql_escape($usrAuth['ForeignUserKey']);
 					break;
 					
 					case 'twitter':
-						$twID = $this->vdb->escape($usrAuth['ForeignUserKey']);
+						$twID = $db->sql_escape($usrAuth['ForeignUserKey']);
 					break;
 					
 					case 'openid':
-						$oiID = $this->vdb->escape($usrAuth['ForeignUserKey']);
+						$oiID = $db->sql_escape($usrAuth['ForeignUserKey']);
 					break;	
 					
 					//cases to skip, as they deal with internal vanilla hashing or JS-connect settings from wordpress.
