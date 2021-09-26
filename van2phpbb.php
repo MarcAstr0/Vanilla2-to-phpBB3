@@ -1018,7 +1018,7 @@ class van2phpbb
 					// Format "Last Post(er)" data for addition to this thread.
                     $tPosterAr = array('lp_name' => utf8_encode( $lpName ),
                                        'lp_id'   => $thread['LastCommentUserID'],
-                                       'lp_time' => $thread['DateLastComment'] );
+                                       'lp_time' => (empty($thread['DateLastComment'])) ? $thread['DateInserted'] : $thread['DateLastComment'] );
                     
                     // Run statement to insert new thread at $newCatID relating to user of $newUsrID.
                     $tID = addTopicPost( $thread['Name'], $body, $newCatID, 0, $newUsrID, $userName, $thread['DateInserted'], $postType, $thread['Closed'], $tPosterAr );
