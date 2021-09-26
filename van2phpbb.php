@@ -156,9 +156,6 @@ function addNewForum( $fName, $fDescription, $fNumPosts, $fNumThreads )
            'forum_topics_per_page'    =>   0,
            'forum_type'               =>   1,
            'forum_status'             =>   0,
-           'forum_posts'              =>   0, //$fNumPosts,
-           'forum_topics'             =>   0, //$fNumThreads,
-           'forum_topics_real'        =>   0,
            'forum_last_post_id'       =>   0,
            'forum_last_poster_id'     =>   0,
            'forum_last_post_subject'  =>   '',
@@ -320,9 +317,9 @@ function addTopicPost( $subject, $message, $forumID, $topicID, $userID, $userNam
 	// If this is a topic post, and not a comment-post, re-set poster information that was auto-populated by the API function.
     if( $topicID == 0 )
     {
-        $userName = mysql_real_escape_string( $userName );
+        $userName = $this->vdb->escape( $userName );
         
-        $lastPosterName = mysql_real_escape_string( $tPosters['lp_name'] );
+        $lastPosterName = $this->vdb->escape( $tPosters['lp_name'] );
         $lastPosterID   = ( empty($tPosters['lp_id']) ) ? 0 : $tPosters['lp_id'] ;
         $lastPostTime   = $tPosters['lp_time'];
         
@@ -882,15 +879,15 @@ class van2phpbb
 					switch( strtolower( $usrAuth['ProviderKey'] ) )
 					{
 					case 'facebook':
-						$fbID = mysql_real_escape_string($usrAuth['ForeignUserKey']);
+						$fbID = $this->vdb->escape($usrAuth['ForeignUserKey']);
 					break;
 					
 					case 'twitter':
-						$twID = mysql_real_escape_string($usrAuth['ForeignUserKey']);
+						$twID = $this->vdb->escape($usrAuth['ForeignUserKey']);
 					break;
 					
 					case 'openid':
-						$oiID = mysql_real_escape_string($usrAuth['ForeignUserKey']);
+						$oiID = $this->vdb->escape($usrAuth['ForeignUserKey']);
 					break;	
 					
 					//cases to skip, as they deal with internal vanilla hashing or JS-connect settings from wordpress.
