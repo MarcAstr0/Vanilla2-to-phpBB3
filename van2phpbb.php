@@ -431,7 +431,7 @@ function correctThreadReplyCounts( &$countAr )
     
     foreach( $countAr as $tid => $postCount )
     {
-        $sql = 'UPDATE ' . TOPICS_TABLE . ' SET `topic_replies`=' . $postCount . ', `topic_replies_real`='. $postCount .'
+        $sql = 'UPDATE ' . TOPICS_TABLE . ' SET `topic_posts_approved`='. $postCount .'
                 WHERE topic_id = ' . $tid ;
         $db->sql_query( $sql );
     }
@@ -446,7 +446,7 @@ function correctCategoryPostCounts( &$countAr )
     
     foreach( $countAr as $fid => $postCount )
     {
-        $sql = 'UPDATE ' . FORUMS_TABLE . ' SET `forum_posts`=' . $postCount . '
+        $sql = 'UPDATE ' . FORUMS_TABLE . ' SET `forum_posts_approved`=' . $postCount . '
                 WHERE forum_id = ' . $fid ;
         $db->sql_query( $sql );
     }
@@ -461,7 +461,7 @@ function correctCategoryThreadCounts( &$countAr )
     
     foreach( $countAr as $fid => $postCount )
     {
-        $sql = 'UPDATE ' . FORUMS_TABLE . ' SET `forum_topics`=' . $postCount . ', `forum_topics_real` = '. $postCount .'
+        $sql = 'UPDATE ' . FORUMS_TABLE . ' SET `forum_topics_approved` = '. $postCount .'
                 WHERE forum_id = ' . $fid ;
         $db->sql_query( $sql );
     }
