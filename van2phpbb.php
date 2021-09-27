@@ -60,6 +60,7 @@ function addNewUser( $userName, $email, $password, $usr_type, $regDate, $lastAct
       'user_email'      => $email,
       'group_id'        => 2, //Registered User Group.
       'user_timezone'   => '1.00',
+      'user_dst'        => 0,
       'user_lang'       => 'en',
       'user_type'       => $usr_type, //NORMAL_USER 0
       'user_actkey'     => $user_actkey,
@@ -84,7 +85,7 @@ function checkInvalidUser( $username, $email )
 {
     $err = '';
 
-    $valid_email = phpbb_validate_email($email);
+    $valid_email = validate_email($email);
     if( $valid_email ) 
     {
         $err .= $valid_email .".\n";
@@ -156,6 +157,9 @@ function addNewForum( $fName, $fDescription, $fNumPosts, $fNumThreads )
            'forum_topics_per_page'    =>   0,
            'forum_type'               =>   1,
            'forum_status'             =>   0,
+           'forum_posts'              =>   0, //$fNumPosts,
+           'forum_topics'             =>   0, //$fNumThreads,
+           'forum_topics_real'        =>   0,
            'forum_last_post_id'       =>   0,
            'forum_last_poster_id'     =>   0,
            'forum_last_post_subject'  =>   '',
