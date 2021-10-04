@@ -1145,7 +1145,7 @@ class van2phpbb
                         
                         //run statement to insert new thread at $newCatID relating to user of $newUsrID.
                         //This instance also requires the $newTopicID to insert to the correct thread.
-                        addTopicPost( $postTitle, $body, $newCatID, $newTopicID, $newUsrID, $userName, $post['DateInserted'] );
+                        addTopicPost( strip_tags( $postTitle ), $body, $newCatID, $newTopicID, $newUsrID, $userName, $post['DateInserted'] );
                     }
                     else
                     {    $this->outputBuffer .= "<strong>Post Error:</strong> CatID: {$newCatID} | UsrID: {$newUsrID} | UsrName: {$userName} | Title: {$postTitle} <br />\n";  continue;  }
