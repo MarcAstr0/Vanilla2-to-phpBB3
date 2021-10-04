@@ -286,7 +286,7 @@ function addTopicPost( $subject, $message, $forumID, $topicID, $userID, $userNam
     
         // Other Options
         'post_edit_locked'   => 0,        // Disallow post editing? 1 = Yes, 0 = No
-        'topic_title'        => $subject,    // Subject/Title of the topic. (string)
+        'topic_title'        => strip_tags(htmlspecialchars_decode($subject)),    // Subject/Title of the topic. (string)
     
         // Email Notification Settings
         'notify_set'         => false,        // (bool)
@@ -302,7 +302,7 @@ function addTopicPost( $subject, $message, $forumID, $topicID, $userID, $userNam
         'force_approved_state'    => true, // Allow the post to be submitted without going into unapproved queue
     );
     
-    submit_post('post', $subject, '', $postType, $poll, $data);
+    submit_post('post', strip_tags(htmlspecialchars_decode($subject)), '', $postType, $poll, $data);
     
     //Right here we want to reset the user id who posted, so it reflects the original poster ID.
     
@@ -389,7 +389,7 @@ function addPrivMsg( $addrList, $fromID, $fromName, $fromIP, $message, $title, $
     
     $put_in_outbox = true;
     
-    submit_pm('post', $my_subject, $data, $put_in_outbox);
+    submit_pm('post', strip_tags(htmlspecialchars_decode($my_subject)), $data, $put_in_outbox);
     
     // Update the message post time and root-level data.
 	$sql = 'UPDATE '. PRIVMSGS_TABLE .' 
@@ -1021,7 +1021,7 @@ class van2phpbb
                                        'lp_time' => (empty($thread['DateLastComment'])) ? $thread['DateInserted'] : $thread['DateLastComment'] );
                     
                     // Run statement to insert new thread at $newCatID relating to user of $newUsrID.
-                    $tID = addTopicPost( strip_tags(htmlspecialchars_decode($thread['Name'])), $body, $newCatID, 0, $newUsrID, $userName, $thread['DateInserted'], $postType, $thread['Closed'], $tPosterAr );
+                    $tID = addTopicPost( $thread['Name'], $body, $newCatID, 0, $newUsrID, $userName, $thread['DateInserted'], $postType, $thread['Closed'], $tPosterAr );
                     // Update all data maps.
                     $this->mapThreads_vnID2Name[ $thread['DiscussionID'] ] = $thread['Name'];
                     $this->mapThreads_topic2cat[ $thread['DiscussionID'] ] = $thread['CategoryID'];
@@ -1115,7 +1115,7 @@ class van2phpbb
                     {    $this->outputBuffer .= "<strong>UsrMap Error:</strong> ID: {$post['InsertUserID']} <br />\n";  continue;  }
                     
                     if( isset($this->mapThreads_vnID2Name[ $post['DiscussionID'] ]) )
-                    {    $postTitle = strip_tags( htmlspecialchars_decode($this->mapThreads_vnID2Name[ $post['DiscussionID'] ]) );  }
+                    {    $postTitle = $this->mapThreads_vnID2Name[ $post['DiscussionID'] ];  }
                     else
                     {    $this->outputBuffer .= "<strong>TopicMap Error:</strong> ID: {$post['DiscussionID']} <br />\n";  continue;  }
                     
@@ -1145,7 +1145,7 @@ class van2phpbb
                         
                         //run statement to insert new thread at $newCatID relating to user of $newUsrID.
                         //This instance also requires the $newTopicID to insert to the correct thread.
-                        addTopicPost( strip_tags( htmlspecialchars_decode($postTitle) ), $body, $newCatID, $newTopicID, $newUsrID, $userName, $post['DateInserted'] );
+                        addTopicPost( $postTitle, $body, $newCatID, $newTopicID, $newUsrID, $userName, $post['DateInserted'] );
                     }
                     else
                     {    $this->outputBuffer .= "<strong>Post Error:</strong> CatID: {$newCatID} | UsrID: {$newUsrID} | UsrName: {$userName} | Title: {$postTitle} <br />\n";  continue;  }
@@ -1252,7 +1252,7 @@ class van2phpbb
 					$rootLevelID = 0;
     	            
 					// Format message title, create one if none logged.
-					$title = ( empty($msg['Subject']) ) ? 'Message From '. $fromName : strip_tags( htmlspecialchars_decode($msg['Subject']) ) ;
+					$title = ( empty($msg['Subject']) ) ? 'Message From '. $fromName : $msg['Subject'] ;
     	            
 					// Prepend "Re: " if message has a FirstMessageID or "root_level" ID in BB3.
 					if( $msg['FirstMessageID'] != 0 && $this->mapPrivMsgs_vn2bb[ $msg['FirstMessageID'] ] != 0 &&
