@@ -1021,7 +1021,7 @@ class van2phpbb
                                        'lp_time' => (empty($thread['DateLastComment'])) ? $thread['DateInserted'] : $thread['DateLastComment'] );
                     
                     // Run statement to insert new thread at $newCatID relating to user of $newUsrID.
-                    $tID = addTopicPost( $thread['Name'], $body, $newCatID, 0, $newUsrID, $userName, $thread['DateInserted'], $postType, $thread['Closed'], $tPosterAr );
+                    $tID = addTopicPost( strip_tags($thread['Name']), $body, $newCatID, 0, $newUsrID, $userName, $thread['DateInserted'], $postType, $thread['Closed'], $tPosterAr );
                     // Update all data maps.
                     $this->mapThreads_vnID2Name[ $thread['DiscussionID'] ] = $thread['Name'];
                     $this->mapThreads_topic2cat[ $thread['DiscussionID'] ] = $thread['CategoryID'];
