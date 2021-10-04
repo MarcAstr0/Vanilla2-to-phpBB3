@@ -1115,7 +1115,7 @@ class van2phpbb
                     {    $this->outputBuffer .= "<strong>UsrMap Error:</strong> ID: {$post['InsertUserID']} <br />\n";  continue;  }
                     
                     if( isset($this->mapThreads_vnID2Name[ $post['DiscussionID'] ]) )
-                    {    $postTitle = $this->mapThreads_vnID2Name[ $post['DiscussionID'] ];  }
+                    {    $postTitle = strip_tags( $this->mapThreads_vnID2Name[ $post['DiscussionID'] ] );  }
                     else
                     {    $this->outputBuffer .= "<strong>TopicMap Error:</strong> ID: {$post['DiscussionID']} <br />\n";  continue;  }
                     
@@ -1252,7 +1252,7 @@ class van2phpbb
 					$rootLevelID = 0;
     	            
 					// Format message title, create one if none logged.
-					$title = ( empty($msg['Subject']) ) ? 'Message From '. $fromName : $msg['Subject'] ;
+					$title = ( empty($msg['Subject']) ) ? 'Message From '. $fromName : strip_tags( $msg['Subject'] ) ;
     	            
 					// Prepend "Re: " if message has a FirstMessageID or "root_level" ID in BB3.
 					if( $msg['FirstMessageID'] != 0 && $this->mapPrivMsgs_vn2bb[ $msg['FirstMessageID'] ] != 0 &&
